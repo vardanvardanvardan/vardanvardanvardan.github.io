@@ -1,0 +1,19 @@
+body {
+ margin: 0;
+ padding: 0;
+}
+.elections {
+ width: 100%;
+ max-width: 960px;
+ margin: auto;
+}
+.elections h1 {
+ color: #333;
+ text-align: center;
+ margin-bottom: 20px;
+}
+.elections p {
+ font-size: 1.2rem;
+ color: #666;
+ text-align: justify;
+}
