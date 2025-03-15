@@ -7,7 +7,7 @@
     <style>
         body {
             background-color: black;
-            color: gray;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,12 +18,14 @@
         }
         .video-container {
             position: relative;
-            width: 1280px;
-            height: 720px;
+            width: 90vw; /* 90% of viewport width */
+            max-width: 1280px;
+            aspect-ratio: 16 / 9; /* Keeps 1280x720 ratio */
         }
         video {
             width: 100%;
             height: 100%;
+            object-fit: cover;
             cursor: pointer;
         }
     </style>
@@ -31,12 +33,11 @@
 <body>
     <div class="video-container">
         <a href="2032.html">
-            <video width="1280" height="720" autoplay loop muted>
-                <source src="https://vrdn.cc/trash/2032.mp4" type="video/mp4">
+            <video autoplay loop muted playsinline>
+                <source src="vrdn.cc/trash/2032.mp4" type="video/mp4">
             </video>
         </a>
     </div>
     <p class="caption">This is a parody and an enactment on what if that happened.</p>
 </body>
 </html>
-
