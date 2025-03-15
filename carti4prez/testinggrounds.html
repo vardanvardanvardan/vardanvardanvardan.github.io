@@ -14,31 +14,27 @@
             height: 100vh;
             margin: 0;
             flex-direction: column;
-            text-align: center; /* Centers the text */
+            text-align: center;
         }
         .video-container {
             position: relative;
-            width: 80%;
-            max-width: 800px;
+            width: 1280px;
+            height: 720px;
         }
-        .video-image {
+        video {
             width: 100%;
-            height: auto;
+            height: 100%;
             cursor: pointer;
-        }
-        .caption {
-            color: grey;
-            font-size: 14px;
-            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-   <a href="2032.html">
-    <video width="80%" max-width="800px" controls>
-        <source src="vrdn.cc/trash/2032.mp4" type="video/mp4">
-    </video>
-</a>
+    <div class="video-container">
+        <a href="2032.html">
+            <video width="1280" height="720" autoplay loop muted>
+                <source src="vrdn.cc/trash/2032.mp4" type="video/mp4">
+            </video>
+        </a>
     </div>
     <p class="caption">This is a parody and an enactment on what if that happened.</p>
 </body>
