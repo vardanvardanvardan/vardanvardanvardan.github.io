@@ -61,7 +61,7 @@ video {
     .video-container {
         width: 90vw;
         max-width: 550px;
-        aspect-ratio: 608 / 1080;
+        aspect-ratio: 608 / 1080; /* Default for mobile.mp4 in portrait */
         margin-top: -8vh;
     }
 
@@ -74,17 +74,18 @@ video {
 /* Landscape mode (for mobile devices) */
 @media (max-width: 768px) and (orientation: landscape) {
     .video-container {
-        width: 70vw;
+        width: 90vw; /* Increased to fit screen better */
         max-width: 600px;
-        height: auto;
-        aspect-ratio: 608 / 1080; /* Match mobile.mp4's portrait aspect ratio */
+        height: auto; /* Let height adjust naturally */
+        aspect-ratio: unset; /* Remove forced aspect ratio */
         margin-top: 0;
     }
 
     video {
-        object-fit: none; /* Display at native resolution */
+        object-fit: contain; /* Resize to fit, maintaining aspect ratio */
         width: 100%;
-        height: auto; /* Scale height proportionally */
+        height: auto; /* Allow natural scaling */
+        max-height: 100vh; /* Prevent overflow beyond viewport */
     }
 
     .caption {
@@ -98,7 +99,7 @@ video {
     }
 }
 
-/* Landscape or wide screens */
+/* Desktop or wide screens */
 @media (min-width: 769px) {
     .video-container {
         width: 50vw;
