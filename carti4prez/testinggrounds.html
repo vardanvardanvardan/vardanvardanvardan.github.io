@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2032</title>
 
-    <!-- Font -->
-    <link href="https://vrdn.cc/trash/HelveticaLTStd-BoldCond.otf" rel="stylesheet">
-
     <style>
+        /* Use @font-face to load the custom font */
+        @font-face {
+            font-family: 'HelveticaLTStd-BoldCond';
+            src: url('https://vrdn.cc/trash/HelveticaLTStd-BoldCond.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
         body {
             background-color: black;
             color: grey;
@@ -19,21 +24,24 @@
             margin: 0;
             flex-direction: column;
             text-align: center;
-            font-family: 'Helvetica LT Std Cond', sans-serif;
+            font-family: 'HelveticaLTStd-BoldCond', sans-serif; /* Apply the custom font */
             overflow: hidden; /* Prevent scrolling */
         }
+
         .video-container {
             position: relative;
-            width: 50vw; 
-            max-width: 700px; 
+            width: 50vw;
+            max-width: 700px;
             aspect-ratio: 16 / 9;
         }
+
         video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             cursor: pointer;
         }
+
         .caption {
             position: absolute;
             bottom: 10px;
@@ -42,19 +50,20 @@
             font-size: 0.9rem;
             color: gray;
             text-transform: uppercase;
-            font-family: 'Helvetica LT Std Cond', sans-serif;
+            font-family: 'HelveticaLTStd-BoldCond', sans-serif; /* Apply the custom font */
         }
-        
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .video-container {
-                width: 90vw; 
-                max-width: 550px; 
+                width: 90vw;
+                max-width: 550px;
                 aspect-ratio: 608 / 1080;
-                margin-top: -8vh; 
+                margin-top: -8vh;
             }
+
             .caption {
-                font-size: 0.8rem; 
+                font-size: 0.8rem;
             }
         }
     </style>
