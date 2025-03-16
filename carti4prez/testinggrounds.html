@@ -19,6 +19,7 @@
     <script>
         const video = document.getElementById('video');
         const videoSource = document.getElementById('video-source');
+        const videoContainer = document.querySelector('.video-container');
 
         // Comprehensive mobile device detection
         const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(navigator.userAgent) || 
@@ -27,41 +28,61 @@
 
         // Detect desktop mode or desktop-like viewport
         const getViewportWidth = () => Math.max(
-            window.innerWidth,
-            document.documentElement.clientWidth,
+            window.innerWidth || 0,
+            document.documentElement.clientWidth || 0,
             window.screen.width || 0
         );
-        const isDesktopMode = getViewportWidth() > 768;
+        const isDesktopMode = () => getViewportWidth() > 768;
 
         // Detect orientation
         const isLandscape = () => window.matchMedia("(orientation: landscape)").matches || 
                                  (window.innerWidth > window.innerHeight);
 
-        // Set initial video source
-        const updateVideoSource = () => {
-            const viewportWidth = getViewportWidth();
+        // Update video source and container styles
+        const updateVideo = () => {
+            const desktopMode = isDesktopMode();
             const landscape = isLandscape();
             let newSrc = "https://vrdn.cc/trash/2032.mp4"; // Default to desktop video
-            if (isMobileDevice && !isDesktopMode) {
+
+            if (isMobileDevice && !desktopMode) {
                 newSrc = "https://vrdn.cc/trash/mobile.mp4"; // Mobile video for both orientations
             }
+
             if (videoSource.src !== newSrc) {
                 videoSource.src = newSrc;
                 video.load();
             }
+
+            // Dynamically adjust container for landscape resizing
+            if (isMobileDevice && !desktopMode && landscape) {
+                videoContainer.style.width = '100vw';
+                videoContainer.style.height = 'auto';
+                videoContainer.style.maxHeight = '100vh';
+                videoContainer.style.aspectRatio = 'unset';
+            } else if (isMobileDevice && !desktopMode) {
+                videoContainer.style.width = '90vw';
+                videoContainer.style.maxWidth = '550px';
+                videoContainer.style.height = 'auto';
+                videoContainer.style.aspectRatio = '608 / 1080';
+            } else {
+                videoContainer.style.width = '50vw';
+                videoContainer.style.maxWidth = '700px';
+                videoContainer.style.height = 'auto';
+                videoContainer.style.aspectRatio = '16 / 9';
+            }
         };
 
         // Initial load
-        updateVideoSource();
+        updateVideo();
 
-        // Handle resize, orientation changes, or desktop mode toggle
+        // Handle resize and orientation changes
         let resizeTimeout;
         const handleResize = () => {
             clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(updateVideoSource, 100); // Debounce for performance
+            resizeTimeout = setTimeout(updateVideo, 100); // Debounce for performance
         };
         window.addEventListener('resize', handleResize);
-        window.addEventListener('orientationchange', handleResize); // Explicit orientation event
+        window.addEventListener('orientationchange', handleResize);
     </script>
 </body>
 </html>
