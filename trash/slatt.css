@@ -43,6 +43,12 @@ video {
     height: 100%;
     object-fit: cover;
     cursor: pointer;
+    display: block; /* Prevent extra spacing in some browsers */
+}
+
+/* Ensure video plays inline on iOS */
+video[playsinline] {
+    -webkit-transform: translateZ(0); /* Fix for iOS Safari */
 }
 
 .caption {
@@ -74,18 +80,18 @@ video {
 /* Landscape mode (for mobile devices) */
 @media (max-width: 768px) and (orientation: landscape) {
     .video-container {
-        width: 90vw; /* Increased to fit screen better */
+        width: 90vw;
         max-width: 600px;
-        height: auto; /* Let height adjust naturally */
-        aspect-ratio: unset; /* Remove forced aspect ratio */
+        height: auto;
+        aspect-ratio: unset; /* Let video dictate aspect ratio */
         margin-top: 0;
     }
 
     video {
         object-fit: contain; /* Resize to fit, maintaining aspect ratio */
         width: 100%;
-        height: auto; /* Allow natural scaling */
-        max-height: 100vh; /* Prevent overflow beyond viewport */
+        height: auto;
+        max-height: 100vh; /* Prevent overflow */
     }
 
     .caption {
