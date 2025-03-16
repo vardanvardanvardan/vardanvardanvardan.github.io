@@ -72,15 +72,16 @@
         /* Landscape mode (for mobile devices) */
         @media (max-width: 768px) and (orientation: landscape) {
             .video-container {
-                width: 60vw; /* Reduce the video width to 60% of viewport width */
-                max-width: 480px; /* Set a max width to ensure the video is not too large */
-                aspect-ratio: 16 / 9; /* Maintain correct aspect ratio */
-                margin-top: 5vh; /* Allow a bit of margin at the top */
+                width: 50vw; /* Reduce the width of the video container in landscape */
+                max-width: 400px; /* Set a smaller max width for landscape mode */
+                height: auto; /* Allow the height to adjust based on width */
+                aspect-ratio: 16 / 9; /* Ensure the aspect ratio stays correct */
+                margin-top: 5vh; /* Allow some space at the top */
             }
 
             .caption {
-                font-size: 0.8rem; /* Slightly larger font size in landscape */
-                margin-top: 10px; /* Prevent caption from overlapping the video */
+                font-size: 0.6rem; /* Reduce the caption font size even further for landscape */
+                margin-top: 10px; /* Prevent caption from overlapping */
             }
         }
 
