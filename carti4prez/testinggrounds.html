@@ -82,15 +82,17 @@
         /* Landscape mode (for mobile devices) */
         @media (max-width: 768px) and (orientation: landscape) {
             .video-container {
-                width: 90vw; /* Adjust width to fit better in landscape */
-                max-width: 700px; /* Set a max width for landscape mode */
-                height: auto;
-                aspect-ratio: 16 / 9; /* Ensure the aspect ratio stays correct */
+                width: 70vw; /* Adjust width for a more compact container */
+                max-width: 600px; /* Set a max width for landscape mode */
+                height: auto; /* Allow the height to adjust based on width */
+                aspect-ratio: 16 / 9; /* Keep aspect ratio consistent */
                 margin-top: 5vh; /* Allow some space at the top */
             }
 
             video {
-                object-fit: contain; /* Ensure the video scales down to fit the container */
+                object-fit: contain; /* Ensure the video scales without clipping */
+                width: 100%; /* Ensure the video fills the container */
+                height: 100%; /* Ensure the video fits without stretching */
             }
 
             .caption {
@@ -137,4 +139,3 @@
     </script>
 </body>
 </html>
-
