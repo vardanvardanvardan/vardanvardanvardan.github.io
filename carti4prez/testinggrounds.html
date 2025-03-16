@@ -37,18 +37,44 @@
             font-size: 0.9rem;
             color: gray;
             text-transform: uppercase;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .video-container {
+                width: 608px;
+                height: 1080px;
+                max-width: 100%;
+                max-height: 100vh;
+                aspect-ratio: 608 / 1080;
+            }
+            .caption {
+                font-size: 0.8rem; /* Slightly smaller for mobile */
+            }
         }
     </style>
 </head>
 <body>
     <div class="video-container">
         <a href="2032.html">
-            <video autoplay loop muted playsinline>
-                <source src="https://vrdn.cc/trash/2032.mp4" type="video/mp4">
+            <video id="video" autoplay loop muted playsinline>
+                <source id="video-source" src="" type="video/mp4">
             </video>
         </a>
     </div>
     <p class="caption">This is a parody and an enactment on what if that happened.</p>
-</body>
-</html> 
 
+    <script>
+        const video = document.getElementById('video');
+        const videoSource = document.getElementById('video-source');
+
+        if (window.innerWidth <= 768) {
+            videoSource.src = "https://vrdn.cc/trash/mobile.mp4";
+        } else {
+            videoSource.src = "https://vrdn.cc/trash/2032.mp4";
+        }
+        video.load(); 
+    </script>
+</body>
+</html>
