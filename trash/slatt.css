@@ -16,7 +16,6 @@ body {
     flex-direction: column;
     text-align: center;
     font-family: 'HelveticaLTStd-BoldCond', sans-serif;
-    overflow: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
