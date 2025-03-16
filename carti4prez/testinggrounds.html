@@ -54,7 +54,7 @@
         const updateVideo = () => {
             const desktopMode = isDesktopMode();
             const landscape = isLandscape();
-            let newSrc = "https://vrdn.cc/trash/2032.mp4"; // Default to desktop video
+            let newSrc = "https://vrdn.cc/trash/desktop.mp4"; // Default to desktop video
 
             if (isMobileDevice && !desktopMode) {
                 newSrc = landscape ? "https://vrdn.cc/trash/landscape.mp4" : "https://vrdn.cc/trash/mobile.mp4";
