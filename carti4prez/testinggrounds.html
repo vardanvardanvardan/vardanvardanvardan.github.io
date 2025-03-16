@@ -68,6 +68,14 @@
                 color: white; /* Ensure color is white on mobile too */
             }
         }
+
+        /* Landscape mode (for mobile devices) */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .video-container {
+                width: 70vw; /* Make the video smaller in landscape mode */
+                max-width: 500px; /* Adjust max-width for landscape */
+            }
+        }
     </style>
 </head>
 <body>
