@@ -20,19 +20,19 @@
         const video = document.getElementById('video');
         const videoSource = document.getElementById('video-source');
 
-        // Check both width and orientation
-        const isMobile = window.innerWidth <= 768 || window.matchMedia("(orientation: portrait)").matches;
+        // Detect mobile device using user agent and a reasonable width threshold
+        const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 1024;
 
-        if (isMobile) {
+        if (isMobileDevice) {
             videoSource.src = "https://vrdn.cc/trash/mobile.mp4";
         } else {
             videoSource.src = "https://vrdn.cc/trash/2032.mp4";
         }
         video.load();
 
-        // Handle orientation changes
+        // Handle orientation or resize changes
         window.addEventListener('resize', () => {
-            const isMobileNow = window.innerWidth <= 768 || window.matchMedia("(orientation: portrait)").matches;
+            const isMobileNow = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 1024;
             const newSrc = isMobileNow ? "https://vrdn.cc/trash/mobile.mp4" : "https://vrdn.cc/trash/2032.mp4";
             if (videoSource.src !== newSrc) {
                 videoSource.src = newSrc;
