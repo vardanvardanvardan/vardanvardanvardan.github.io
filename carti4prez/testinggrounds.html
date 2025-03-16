@@ -4,117 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2032</title>
-
-    <style>
-        /* General CSS reset for mobile compatibility */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: black;
-            color: grey;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-            text-align: center;
-            font-family: 'HelveticaLTStd-BoldCond', sans-serif; /* Custom font */
-            overflow: hidden; /* Prevent scrolling */
-            -webkit-font-smoothing: antialiased; /* Improve font rendering */
-            -moz-osx-font-smoothing: grayscale; /* Improve font rendering */
-        }
-
-        /* Use @font-face to load the custom font */
-        @font-face {
-            font-family: 'HelveticaLTStd-BoldCond';
-            src: url('https://vrdn.cc/trash/HelveticaLTStd-BoldCond.otf') format('opentype');
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        /* Video container responsive styles */
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-
-        .caption {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            font-size: 0.9rem;
-            color: white; /* Make caption text white */
-            text-transform: uppercase;
-            font-family: 'HelveticaLTStd-BoldCond', sans-serif; /* Apply the custom font */
-        }
-
-        /* Mobile-specific styles */
-        @media (max-width: 768px) {
-            .video-container {
-                width: 90vw;
-                max-width: 550px;
-                aspect-ratio: 608 / 1080;
-                margin-top: -8vh;
-            }
-
-            .caption {
-                font-size: 0.7rem; /* Reduce font size for mobile */
-                color: white; /* Ensure color is white on mobile too */
-            }
-        }
-
-        /* Landscape mode (for mobile devices) */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .video-container {
-                width: 70vw; /* Adjust width for a more compact container */
-                max-width: 600px; /* Set a max width for landscape mode */
-                height: auto; /* Allow the height to adjust based on width */
-                aspect-ratio: 16 / 9; /* Keep aspect ratio consistent */
-                margin-top: 5vh; /* Allow some space at the top */
-            }
-
-            video {
-                object-fit: contain; /* Ensure the video scales without clipping */
-                width: 100%; /* Ensure the video fills the container */
-                height: 100%; /* Ensure the video fits without stretching */
-            }
-
-            .caption {
-                font-size: 0.6rem; /* Reduce the caption font size even further for landscape */
-                margin-top: 10px; /* Prevent caption from overlapping */
-            }
-        }
-
-        /* Landscape or wide screens */
-        @media (min-width: 769px) {
-            .video-container {
-                width: 50vw;
-                max-width: 700px;
-                aspect-ratio: 16 / 9;
-            }
-
-            .caption {
-                font-size: 0.9rem; /* Standard caption size for larger screens */
-            }
-        }
-
-    </style>
+    
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="https://vrdn.cc/trash/slatt.css">
 </head>
 <body>
     <div class="video-container">
@@ -135,7 +27,7 @@
         } else {
             videoSource.src = "https://vrdn.cc/trash/2032.mp4";
         }
-        video.load(); 
+        video.load();
     </script>
 </body>
 </html>
