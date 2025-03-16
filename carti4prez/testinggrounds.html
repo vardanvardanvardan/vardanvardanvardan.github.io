@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2032</title>
 
     <style>
-        /* Use @font-face to load the custom font */
-        @font-face {
-            font-family: 'HelveticaLTStd-BoldCond';
-            src: url('https://vrdn.cc/trash/HelveticaLTStd-BoldCond.otf') format('opentype');
-            font-weight: bold;
-            font-style: normal;
+        /* General CSS reset for mobile compatibility */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -24,15 +23,27 @@
             margin: 0;
             flex-direction: column;
             text-align: center;
-            font-family: 'HelveticaLTStd-BoldCond', sans-serif; /* Apply the custom font */
+            font-family: 'HelveticaLTStd-BoldCond', sans-serif; /* Custom font */
             overflow: hidden; /* Prevent scrolling */
+            -webkit-font-smoothing: antialiased; /* Improve font rendering */
+            -moz-osx-font-smoothing: grayscale; /* Improve font rendering */
         }
 
+        /* Use @font-face to load the custom font */
+        @font-face {
+            font-family: 'HelveticaLTStd-BoldCond';
+            src: url('https://vrdn.cc/trash/HelveticaLTStd-BoldCond.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* Video container responsive styles */
         .video-container {
             position: relative;
-            width: 50vw;
+            width: 100%;
             max-width: 700px;
             aspect-ratio: 16 / 9;
+            overflow: hidden;
         }
 
         video {
@@ -62,7 +73,6 @@
                 margin-top: -8vh;
             }
 
-            /* Make caption smaller and white on mobile */
             .caption {
                 font-size: 0.7rem; /* Reduce font size for mobile */
                 color: white; /* Ensure color is white on mobile too */
@@ -74,6 +84,7 @@
             .video-container {
                 width: 90vw; /* Adjust width to fit better in landscape */
                 max-width: 700px; /* Set a max width for landscape mode */
+                height: auto;
                 aspect-ratio: 16 / 9; /* Ensure the aspect ratio stays correct */
                 margin-top: 5vh; /* Allow some space at the top */
             }
@@ -85,6 +96,19 @@
             .caption {
                 font-size: 0.6rem; /* Reduce the caption font size even further for landscape */
                 margin-top: 10px; /* Prevent caption from overlapping */
+            }
+        }
+
+        /* Landscape or wide screens */
+        @media (min-width: 769px) {
+            .video-container {
+                width: 50vw;
+                max-width: 700px;
+                aspect-ratio: 16 / 9;
+            }
+
+            .caption {
+                font-size: 0.9rem; /* Standard caption size for larger screens */
             }
         }
 
