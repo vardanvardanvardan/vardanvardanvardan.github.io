@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2032</title>
+
+    <!-- Font -->
+    <link href="https://fonts.cdnfonts.com/css/impact" rel="stylesheet">
+
     <style>
         body {
             background-color: black;
@@ -15,7 +19,8 @@
             margin: 0;
             flex-direction: column;
             text-align: center;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-family: 'Impact', sans-serif;
+            font-family: 'Impacted', sans-serif;
         }
         .video-container {
             position: relative;
@@ -37,19 +42,20 @@
             font-size: 0.9rem;
             color: gray;
             text-transform: uppercase;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-family: 'Impact', sans-serif;
+            font-family: 'Impacted', sans-serif;
         }
         
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .video-container {
-                width: 90vw; /* Increased size */
-                max-width: 550px; /* Bigger but not too big */
+                width: 90vw; 
+                max-width: 550px; 
                 aspect-ratio: 608 / 1080;
-                margin-top: -5vh; /* Moves video slightly up */
+                margin-top: -8vh; 
             }
             .caption {
-                font-size: 0.8rem; /* Slightly smaller for mobile */
+                font-size: 0.8rem; 
             }
         }
     </style>
@@ -69,7 +75,7 @@
         const videoSource = document.getElementById('video-source');
 
         if (window.innerWidth <= 768) {
-            videoSource.src = "https://vrdn.cc/trash/mobile.mp4";
+            videoSource.src = "https://vrdn.cc/trash/2032-mobile.mp4";
         } else {
             videoSource.src = "https://vrdn.cc/trash/2032.mp4";
         }
@@ -77,4 +83,3 @@
     </script>
 </body>
 </html>
-
