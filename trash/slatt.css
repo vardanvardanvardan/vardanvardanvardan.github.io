@@ -74,17 +74,17 @@ video {
 /* Landscape mode (for mobile devices) */
 @media (max-width: 768px) and (orientation: landscape) {
     .video-container {
-        width: 90vw;
+        width: 70vw;
         max-width: 600px;
-        height: 70vh;
-        aspect-ratio: 16 / 9;
+        height: auto;
+        aspect-ratio: 608 / 1080; /* Match mobile.mp4's portrait aspect ratio */
         margin-top: 0;
     }
 
     video {
-        object-fit: contain;
+        object-fit: none; /* Display at native resolution */
         width: 100%;
-        height: 100%;
+        height: auto; /* Scale height proportionally */
     }
 
     .caption {
