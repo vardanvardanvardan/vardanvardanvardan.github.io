@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2032</title>
-    
-    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="https://vrdn.cc/trash/slatt.css">
 </head>
 <body>
@@ -22,12 +20,25 @@
         const video = document.getElementById('video');
         const videoSource = document.getElementById('video-source');
 
-        if (window.innerWidth <= 768) {
+        // Check both width and orientation
+        const isMobile = window.innerWidth <= 768 || window.matchMedia("(orientation: portrait)").matches;
+
+        if (isMobile) {
             videoSource.src = "https://vrdn.cc/trash/mobile.mp4";
         } else {
             videoSource.src = "https://vrdn.cc/trash/2032.mp4";
         }
         video.load();
+
+        // Handle orientation changes
+        window.addEventListener('resize', () => {
+            const isMobileNow = window.innerWidth <= 768 || window.matchMedia("(orientation: portrait)").matches;
+            const newSrc = isMobileNow ? "https://vrdn.cc/trash/mobile.mp4" : "https://vrdn.cc/trash/2032.mp4";
+            if (videoSource.src !== newSrc) {
+                videoSource.src = newSrc;
+                video.load();
+            }
+        });
     </script>
 </body>
 </html>
