@@ -43,10 +43,8 @@
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .video-container {
-                width: 608px;
-                height: 1080px;
-                max-width: 100%;
-                max-height: 100vh;
+                width: 85vw; /* Reduced from 100% to 85% */
+                max-width: 500px; /* Limits size on larger mobile screens */
                 aspect-ratio: 608 / 1080;
             }
             .caption {
@@ -70,7 +68,7 @@
         const videoSource = document.getElementById('video-source');
 
         if (window.innerWidth <= 768) {
-            videoSource.src = "https://vrdn.cc/trash/mobile.mp4";
+            videoSource.src = "https://vrdn.cc/trash/2032-mobile.mp4";
         } else {
             videoSource.src = "https://vrdn.cc/trash/2032.mp4";
         }
