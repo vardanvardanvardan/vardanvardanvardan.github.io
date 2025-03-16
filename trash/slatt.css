@@ -29,21 +29,20 @@ body {
     font-style: normal;
 }
 
-/* Video container responsive styles */
+/* Video container base styles */
 .video-container {
     position: relative;
     width: 100%;
     max-width: 700px;
-    aspect-ratio: 16 / 9;
     overflow: hidden;
 }
 
 video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain; /* Resize to fit, maintaining aspect ratio */
     cursor: pointer;
-    display: block; /* Prevent extra spacing in some browsers */
+    display: block; /* Prevent extra spacing */
 }
 
 /* Ensure video plays inline on iOS */
@@ -62,40 +61,24 @@ video[playsinline] {
     font-family: 'HelveticaLTStd-BoldCond', sans-serif;
 }
 
-/* Mobile-specific styles */
+/* Mobile-specific styles (portrait default) */
 @media (max-width: 768px) {
     .video-container {
-        width: 90vw;
-        max-width: 550px;
-        aspect-ratio: 608 / 1080; /* Default for mobile.mp4 in portrait */
         margin-top: -8vh;
     }
 
     .caption {
         font-size: 0.7rem;
-        color: white;
     }
 }
 
-/* Landscape mode (for mobile devices) */
+/* Landscape mode adjustments */
 @media (max-width: 768px) and (orientation: landscape) {
     .video-container {
-        width: 90vw;
-        max-width: 600px;
-        height: auto;
-        aspect-ratio: unset; /* Let video dictate aspect ratio */
         margin-top: 0;
     }
 
-    video {
-        object-fit: contain; /* Resize to fit, maintaining aspect ratio */
-        width: 100%;
-        height: auto;
-        max-height: 100vh; /* Prevent overflow */
-    }
-
     .caption {
-        font-size: 0.7rem;
         bottom: 5px;
         width: 90%;
     }
@@ -107,12 +90,6 @@ video[playsinline] {
 
 /* Desktop or wide screens */
 @media (min-width: 769px) {
-    .video-container {
-        width: 50vw;
-        max-width: 700px;
-        aspect-ratio: 16 / 9;
-    }
-
     .caption {
         font-size: 0.9rem;
     }
