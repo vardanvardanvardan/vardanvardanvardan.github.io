@@ -13,8 +13,8 @@
                 <source id="video-source" src="https://vrdn.cc/trash/2032.mp4" type="video/mp4">
             </video>
         </a>
+        <p class="caption">This is a parody and an enactment on what if that happened.</p>
     </div>
-    <p class="caption">This is a parody and an enactment on what if that happened.</p>
 
     <script>
         const video = document.getElementById('video');
@@ -47,7 +47,6 @@
             body.style.top = '0';
             body.style.left = '0';
             body.style.width = '100%';
-            // Prevent touchmove scrolling on mobile
             document.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
         };
 
