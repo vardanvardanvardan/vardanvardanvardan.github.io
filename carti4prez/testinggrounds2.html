@@ -87,7 +87,7 @@
             flex-direction: column;
             width: 100vw;
             height: 100vh;
-            overflow-y: auto;
+            overflow-y: scroll; /* Ensure scrolling */
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
         }
@@ -121,6 +121,10 @@
             padding: 20px;
             font-family: 'HelveticaLTStd-BoldCond', sans-serif;
             background: black;
+        }
+
+        .mobile-caption a {
+            text-decoration: none; /* Remove underline */
         }
 
         .fade-overlay {
@@ -178,11 +182,11 @@
             }
         }
         /* Extra space at the bottom of the mobile version */
-.mobile-article::after {
-    content: "";
-    display: block;
-    height: 100px; /* Adjust this value for more or less space */
-}
+        .mobile-article::after {
+            content: "";
+            display: block;
+            height: 100px; /* Adjust this value for more or less space */
+        }
     </style>
 </head>
 <body>
