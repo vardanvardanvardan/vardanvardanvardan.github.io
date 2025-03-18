@@ -86,10 +86,12 @@
             display: none;
             flex-direction: column;
             width: 100vw;
-            height: 100vh;
-            overflow-y: scroll; /* Ensure scrolling */
+            min-height: 100vh; /* Ensures full viewport height */
+            overflow-y: scroll;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            padding-bottom: 120px; /* Extra space to show the full caption */
+            overflow-anchor: none; /* Prevents Firefox jumpy scrolling */
         }
 
         .mobile-article.visible {
@@ -114,17 +116,18 @@
 
         /* Mobile Caption Placement */
         .mobile-caption {
-            display: none;
+            display: block;
             text-align: center;
             font-size: 16px;
             color: white;
             padding: 20px;
             font-family: 'HelveticaLTStd-BoldCond', sans-serif;
             background: black;
+            margin-bottom: 20px; /* Added margin for extra spacing */
         }
 
         .mobile-caption a {
-            text-decoration: none; /* Remove underline */
+            text-decoration: none;
         }
 
         .fade-overlay {
@@ -152,7 +155,7 @@
 
             .mobile-article {
                 display: none;
-                height: 100vh;
+                min-height: 100vh;
                 overflow-y: auto;
             }
 
@@ -181,12 +184,7 @@
                 transform: translateX(-50%);
             }
         }
-        /* Extra space at the bottom of the mobile version */
-        .mobile-article::after {
-            content: "";
-            display: block;
-            height: 100px; /* Adjust this value for more or less space */
-        }
+
     </style>
 </head>
 <body>
@@ -211,10 +209,10 @@
             <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 3">
             <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 4">
             <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 5">
-            <div class="mobile-caption">MADE AND ATE BY <a href="https://vrdn.cc/" style="color: white;">VARDAN</a> FROM THE MOUNTAINS OF THE CAUCASUS</a></div>
+            <div class="mobile-caption">MADE AND ATE BY <a href="https://vrdn.cc/" style="color: white;">VARDAN</a> FROM THE MOUNTAINS OF THE CAUCASUS</div>
         </div>
 
-        <div class="caption">MADE AND ATE BY <a href="https://vrdn.cc/" style="color: white;">VARDAN</a> FROM THE MOUNTAINS OF THE CAUCASUS</a></div>
+        <div class="caption">MADE AND ATE BY <a href="https://vrdn.cc/" style="color: white;">VARDAN</a> FROM THE MOUNTAINS OF THE CAUCASUS</div>
         <div class="fade-overlay"></div>
     </div>
 
@@ -222,7 +220,6 @@
         const image = document.querySelector('.initial-image');
         const article = document.querySelector('.article');
         const mobileArticle = document.querySelector('.mobile-article');
-        const caption = document.querySelector('.caption');
         const overlay = document.querySelector('.fade-overlay');
 
         window.addEventListener('load', () => {
@@ -241,35 +238,16 @@
                 overlay.classList.remove('active');
 
                 if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
-                    mobileArticle.classList.add('visible'); // Show vertical scrolling mobile version
+                    mobileArticle.classList.add('visible');
                 } else {
-                    article.classList.add('visible'); // Show horizontal scrolling version
+                    article.classList.add('visible');
                 }
             }, 2000);
         }
 
         image.addEventListener('click', handleTransition);
         image.addEventListener('touchstart', handleTransition);
-
-        function handleScroll(event) {
-            if (article.classList.contains('visible')) {
-                event.preventDefault();
-                article.scrollLeft += event.deltaY * 1.5;
-            }
-        }
-
-        article.addEventListener('wheel', handleScroll, { passive: false });
-
-        // Detect orientation change and adjust layout
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
-                article.classList.remove('visible');
-                mobileArticle.classList.add('visible');
-            } else {
-                mobileArticle.classList.remove('visible');
-                article.classList.add('visible');
-            }
-        });
     </script>
 </body>
 </html>
+
