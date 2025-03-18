@@ -86,12 +86,11 @@
             display: none;
             flex-direction: column;
             width: 100vw;
-            min-height: 100vh; /* Ensures full viewport height */
-            overflow-y: scroll;
+            min-height: 100vh; /* Ensures full height */
+            overflow-y: auto; /* Allow scrolling */
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            padding-bottom: 120px; /* Extra space to show the full caption */
-            overflow-anchor: none; /* Prevents Firefox jumpy scrolling */
+            padding-bottom: 200px; /* Extra space for caption */
         }
 
         .mobile-article.visible {
@@ -104,17 +103,7 @@
             object-fit: cover;
         }
 
-        .caption {
-            display: none;
-            text-align: center;
-            font-size: 14px;
-            color: white;
-            width: 100%;
-            padding: 20px 0;
-            font-family: 'HelveticaLTStd-BoldCond', sans-serif;
-        }
-
-        /* Mobile Caption Placement */
+        /* Ensures caption is always visible */
         .mobile-caption {
             display: block;
             text-align: center;
@@ -123,11 +112,16 @@
             padding: 20px;
             font-family: 'HelveticaLTStd-BoldCond', sans-serif;
             background: black;
-            margin-bottom: 20px; /* Added margin for extra spacing */
+            position: relative; /* Ensure it follows content */
+            bottom: 0;
+            width: 100%;
         }
 
-        .mobile-caption a {
-            text-decoration: none;
+        /* Extra space at the bottom for Firefox */
+        .mobile-article::after {
+            content: "";
+            display: block;
+            height: 150px; /* Extra space at the bottom */
         }
 
         .fade-overlay {
@@ -155,7 +149,7 @@
 
             .mobile-article {
                 display: none;
-                min-height: 100vh;
+                height: 100vh;
                 overflow-y: auto;
             }
 
@@ -184,7 +178,6 @@
                 transform: translateX(-50%);
             }
         }
-
     </style>
 </head>
 <body>
@@ -220,6 +213,7 @@
         const image = document.querySelector('.initial-image');
         const article = document.querySelector('.article');
         const mobileArticle = document.querySelector('.mobile-article');
+        const caption = document.querySelector('.caption');
         const overlay = document.querySelector('.fade-overlay');
 
         window.addEventListener('load', () => {
@@ -238,15 +232,34 @@
                 overlay.classList.remove('active');
 
                 if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
-                    mobileArticle.classList.add('visible');
+                    mobileArticle.classList.add('visible'); // Show vertical scrolling mobile version
                 } else {
-                    article.classList.add('visible');
+                    article.classList.add('visible'); // Show horizontal scrolling version
                 }
             }, 2000);
         }
 
         image.addEventListener('click', handleTransition);
         image.addEventListener('touchstart', handleTransition);
+
+        function handleScroll(event) {
+            if (article.classList.contains('visible')) {
+                event.preventDefault();
+                article.scrollLeft += event.deltaY * 1.5;
+            }
+        }
+
+        article.addEventListener('wheel', handleScroll, { passive: false });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
+                article.classList.remove('visible');
+                mobileArticle.classList.add('visible');
+            } else {
+                mobileArticle.classList.remove('visible');
+                article.classList.add('visible');
+            }
+        });
     </script>
 </body>
 </html>
