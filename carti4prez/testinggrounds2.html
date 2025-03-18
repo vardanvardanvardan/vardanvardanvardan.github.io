@@ -103,23 +103,24 @@
         }
 
         .caption {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 3;
+            display: none;
             text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 5px 10px;
-            border-radius: 5px;
+            font-size: 14px;
+            color: white;
+            width: 100%;
+            padding: 20px 0;
+            font-family: 'HelveticaLTStd-BoldCond', sans-serif;
         }
 
-        .caption.visible {
-            opacity: 1;
+        /* Mobile Caption Placement */
+        .mobile-caption {
+            display: none;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            padding: 20px;
+            font-family: 'HelveticaLTStd-BoldCond', sans-serif;
+            background: black;
         }
 
         .fade-overlay {
@@ -142,26 +143,38 @@
         /* Mobile Layout Adjustments */
         @media (max-width: 768px) {
             .article {
-                display: none; /* Hide desktop layout */
+                display: none;
             }
 
             .mobile-article {
-                display: none; /* Initially hidden */
+                display: none;
                 height: 100vh;
                 overflow-y: auto;
+            }
+
+            .mobile-caption {
+                display: block;
             }
         }
 
         /* Landscape Mode */
         @media (max-width: 1024px) and (orientation: landscape) {
             .article {
-                display: block; /* Mini desktop layout */
+                display: block;
                 transform: scale(0.9);
                 transform-origin: top left;
             }
 
             .mobile-article {
                 display: none;
+            }
+
+            .caption {
+                display: block;
+                position: fixed;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
     </style>
@@ -173,24 +186,25 @@
         <!-- Desktop/Landscape Article -->
         <div class="article">
             <div class="content-wrapper">
-                <img src="https://vrdn.cc/trash/test.png" alt="Article Image 1" class="article-image">
-                <img src="https://vrdn.cc/trash/test.png" alt="Article Image 2" class="article-image">
-                <img src="https://vrdn.cc/trash/test.png" alt="Article Image 3" class="article-image">
-                <img src="https://vrdn.cc/trash/test.png" alt="Article Image 4" class="article-image">
-                <img src="https://vrdn.cc/trash/test.png" alt="Article Image 5" class="article-image">
+                <img src="test.png" alt="Article Image 1" class="article-image">
+                <img src="test.png" alt="Article Image 2" class="article-image">
+                <img src="test.png" alt="Article Image 3" class="article-image">
+                <img src="test.png" alt="Article Image 4" class="article-image">
+                <img src="test.png" alt="Article Image 5" class="article-image">
             </div>
         </div>
 
         <!-- Mobile Portrait Article -->
         <div class="mobile-article">
-            <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 1">
-            <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 2">
-            <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 3">
-            <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 4">
-            <img src="https://vrdn.cc/trash/test.png" alt="Mobile Image 5">
+            <img src="mobile1.png" alt="Mobile Image 1">
+            <img src="mobile2.png" alt="Mobile Image 2">
+            <img src="mobile3.png" alt="Mobile Image 3">
+            <img src="mobile4.png" alt="Mobile Image 4">
+            <img src="mobile5.png" alt="Mobile Image 5">
+            <div class="mobile-caption">MADE AND ATE BY <a href="https://vrdn.cc/" style="color: white;">VARDAN</a> IN <a href="https://en.wikipedia.org/wiki/Armenia" style="color: white;">THE MOUNTAINS OF THE CAUCASUS</a></div>
         </div>
 
-        <div class="caption">MADE AND ATE BY <a href="https://vrdn.cc/">VARDAN</a> IN <a href="https://en.wikipedia.org/wiki/Armenia">THE MOUNTAINS OF THE CAUCASUS</a></div>
+        <div class="caption">MADE AND ATE BY <a href="https://vrdn.cc/" style="color: white;">VARDAN</a> IN <a href="https://en.wikipedia.org/wiki/Armenia" style="color: white;">THE MOUNTAINS OF THE CAUCASUS</a></div>
         <div class="fade-overlay"></div>
     </div>
 
@@ -221,8 +235,6 @@
                 } else {
                     article.classList.add('visible'); // Show horizontal scrolling version
                 }
-
-                caption.classList.add('visible');
             }, 2000);
         }
 
@@ -251,3 +263,4 @@
     </script>
 </body>
 </html>
+
