@@ -79,14 +79,42 @@
 </a>
 
 <style>
-  .video-js {
-    width: 100% !important;  /* Full width */
-    height: auto !important; /* Maintain aspect ratio */
+/* Default styles for mobile and smaller screens */
+.C__cover_wrap {
+  max-width: 100%; /* Full width on mobile */
+  margin: 0 auto; /* Center the container */
+}
+
+.video-js {
+  width: 100% !important; /* Full width of the container */
+  margin: 0 auto; /* Center the video */
+}
+
+.vjs-fluid {
+  padding-top: 56.25%; /* Maintain 16:9 aspect ratio */
+}
+
+/* Adjust the video container size on desktop */
+@media screen and (min-width: 768px) {
+  .C__cover_wrap {
+    max-width: 1600px; /* Increased for larger desktop display */
   }
 
-  .vjs-fluid {
-    padding-top: 56.25%;  /* Aspect ratio for 16:9 videos */
+  .video-js {
+    max-width: 1400px; /* Larger max-width for the video on desktop */
   }
+}
+
+/* Ensure it stays clean on very large screens */
+@media screen and (min-width: 1600px) {
+  .C__cover_wrap {
+    max-width: 1800px; /* Slightly larger for ultra-wide screens */
+  }
+
+  .video-js {
+    max-width: 1600px; /* Scale up video size for larger desktops */
+  }
+}
 </style>
 
 <script>
