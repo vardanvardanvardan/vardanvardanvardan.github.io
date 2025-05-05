@@ -85,47 +85,57 @@
   height: 100% !important;
 }
 
-/* Desktop-specific styles (50% smaller video) */
+/* Desktop-specific styles (centered and 50% smaller video) */
 @media (min-width: 769px) {
   .video-container {
     max-width: 600px; /* 50% of the original 1200px max-width of .C__cover_wrap */
-    margin: 0 auto;
+    margin: 0 auto; /* Center horizontally */
   }
   .C__cover_wrap {
     padding: 40px 20px;
+    display: flex;
+    justify-content: center; /* Ensure content is centered */
+    align-items: center;
   }
 }
 
-/* Mobile-specific adjustments */
+/* Mobile-specific adjustments (slightly smaller video, -3px) */
 @media (max-width: 768px) {
+  .video-container {
+    max-width: calc(90% - 3px); /* 3px smaller than previous 90% */
+    margin: 0 auto; /* Center on mobile */
+    padding-bottom: 56.25%;
+  }
   .C__cover_wrap {
     padding: 10px;
   }
-  .video-container {
-    padding-bottom: 56.25%;
-    max-width: 100%; /* Ensure full width on mobile */
-  }
   .C__album_inner {
     padding: 0;
+  }
+  .video-js.vjs-fluid {
+    width: 100% !important;
+    max-width: calc(90% - 3px) !important; /* Match container */
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 500px) {
   .video-container {
-    max-width: 100vw;
+    max-width: calc(85% - 3px); /* 3px smaller than previous 85% */
     margin: 0 auto;
   }
   .C__cover_wrap {
     padding: 5px;
   }
   .video-js.vjs-fluid {
-    width: 100vw !important;
-    max-width: 100% !important;
+    width: 100% !important;
+    max-width: calc(85% - 3px) !important;
   }
 }
 
 @media (orientation: landscape) and (max-width: 812px) {
   .video-container {
+    max-width: calc(90% - 3px);
     padding-bottom: 56.25%;
   }
 }
