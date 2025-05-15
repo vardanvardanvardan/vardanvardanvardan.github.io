@@ -199,6 +199,14 @@
   }
 });
 
+document.addEventListener('touchstart', (e) => {
+  const touch = e.touches[0];
+  const target = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (![...items].some(item => item.contains(target))) {
+    outline.style.display = 'none';
+  }
+});
+
 </script>
 </body>
 </html>
