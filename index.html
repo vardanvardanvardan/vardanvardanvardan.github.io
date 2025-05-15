@@ -66,114 +66,133 @@
   <div class="dot-outline" id="dot-outline"></div>
 
   
-  <script>
-    const items = document.querySelectorAll('[data-drag="true"]');
-    const outline = document.getElementById('dot-outline');
-    let isDragging = false;
-    let offsetX = 0, offsetY = 0;
-    let currentItem = null;
-    let wasDragged = false;
+<script>
+  const items = document.querySelectorAll('[data-drag="true"]');
+  const outline = document.getElementById('dot-outline');
+  let isDragging = false;
+  let offsetX = 0, offsetY = 0;
+  let currentItem = null;
+  let wasDragged = false;
 
-    
-    items.forEach(item => {
-      const index = item.dataset.index;
-      const saved = localStorage.getItem('drag-pos-' + index);
-      if (saved) {
-        const { left, top } = JSON.parse(saved);
-        item.style.left = left + 'px';
-        item.style.top = top + 'px';
+
+  items.forEach(item => {
+    const index = item.dataset.index;
+    const saved = localStorage.getItem('drag-pos-' + index);
+    if (saved) {
+      const { left, top } = JSON.parse(saved);
+      item.style.left = left + 'px';
+      item.style.top = top + 'px';
+    }
+  });
+
+  const showOutline = (el) => {
+    const rect = el.getBoundingClientRect();
+    outline.style.width = `${rect.width}px`;
+    outline.style.height = `${rect.height}px`;
+    outline.style.left = `${el.offsetLeft}px`;
+    outline.style.top = `${el.offsetTop}px`;
+    outline.style.display = 'block';
+  };
+
+  const savePosition = (el) => {
+    const index = el.dataset.index;
+    const left = el.offsetLeft;
+    const top = el.offsetTop;
+    localStorage.setItem('drag-pos-' + index, JSON.stringify({ left, top }));
+  };
+
+  const startDrag = (el, x, y) => {
+    offsetX = x - el.offsetLeft;
+    offsetY = y - el.offsetTop;
+    isDragging = true;
+    wasDragged = false;
+    currentItem = el;
+    el.style.zIndex = 1000;
+    showOutline(el);
+    disableScroll();
+  };
+
+  const onDrag = (x, y) => {
+    if (!isDragging || !currentItem) return;
+    wasDragged = true;
+    const newLeft = x - offsetX;
+    const newTop = y - offsetY;
+    currentItem.style.left = `${newLeft}px`;
+    currentItem.style.top = `${newTop}px`;
+    outline.style.left = `${newLeft}px`;
+    outline.style.top = `${newTop}px`;
+  };
+
+  const endDrag = () => {
+    if (currentItem) {
+      savePosition(currentItem);
+      currentItem.style.zIndex = '';
+    }
+    isDragging = false;
+    enableScroll();
+  };
+
+  const disableScroll = () => {
+    document.body.style.overflow = 'hidden';
+  };
+
+  const enableScroll = () => {
+    document.body.style.overflow = '';
+  };
+
+  items.forEach(item => {
+    item.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      startDrag(item, e.clientX, e.clientY);
+    });
+
+    item.addEventListener('click', (e) => {
+      if (wasDragged) {
+        e.preventDefault();
+      } else {
+        showOutline(item);
       }
     });
 
-    const showOutline = (el) => {
-      const rect = el.getBoundingClientRect();
-      outline.style.width = `${rect.width}px`;
-      outline.style.height = `${rect.height}px`;
-      outline.style.left = `${el.offsetLeft}px`;
-      outline.style.top = `${el.offsetTop}px`;
-      outline.style.display = 'block';
-    };
+    document.addEventListener('mousemove', (e) => {
+      onDrag(e.clientX, e.clientY);
+    });
 
-    const savePosition = (el) => {
-      const index = el.dataset.index;
-      const left = el.offsetLeft;
-      const top = el.offsetTop;
-      localStorage.setItem('drag-pos-' + index, JSON.stringify({ left, top }));
-    };
+    document.addEventListener('mouseup', () => {
+      endDrag();
+    });
 
-    const startDrag = (el, x, y) => {
-      offsetX = x - el.offsetLeft;
-      offsetY = y - el.offsetTop;
-      isDragging = true;
-      wasDragged = false;
-      currentItem = el;
-      el.style.zIndex = 1000;
-      showOutline(el);
-    };
 
-    const onDrag = (x, y) => {
-      if (!isDragging || !currentItem) return;
-      wasDragged = true;
-      const newLeft = x - offsetX;
-      const newTop = y - offsetY;
-      currentItem.style.left = `${newLeft}px`;
-      currentItem.style.top = `${newTop}px`;
-      outline.style.left = `${newLeft}px`;
-      outline.style.top = `${newTop}px`;
-    };
+    item.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      startDrag(item, touch.clientX, touch.clientY);
+    });
 
-    const endDrag = () => {
-      if (currentItem) {
-        savePosition(currentItem);
-        currentItem.style.zIndex = '';
-      }
-      isDragging = false;
-    };
-
-    items.forEach(item => {
-      item.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        startDrag(item, e.clientX, e.clientY);
-      });
-
-      item.addEventListener('click', (e) => {
-        if (wasDragged) {
-          e.preventDefault(); 
-        } else {
-          showOutline(item);
-        }
-      });
-
-      document.addEventListener('mousemove', (e) => {
-        onDrag(e.clientX, e.clientY);
-      });
-
-      document.addEventListener('mouseup', () => {
-        endDrag();
-      });
-
-      
-      item.addEventListener('touchstart', (e) => {
-        const touch = e.touches[0];
-        startDrag(item, touch.clientX, touch.clientY);
-      });
-
-      document.addEventListener('touchmove', (e) => {
-        if (!isDragging || !currentItem) return;
+    document.addEventListener('touchmove', (e) => {
+      if (isDragging) {
         const touch = e.touches[0];
         onDrag(touch.clientX, touch.clientY);
-      }, { passive: false });
+        e.preventDefault(); 
+      }
+    }, { passive: false });
 
-      document.addEventListener('touchend', () => {
-        endDrag();
-      });
-
-      item.addEventListener('touchend', (e) => {
-        if (wasDragged) {
-          e.preventDefault(); 
-        }
-      });
+    document.addEventListener('touchend', () => {
+      endDrag();
     });
-  </script>
+
+    item.addEventListener('touchend', (e) => {
+      if (wasDragged) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  document.addEventListener('touchmove', function(e) {
+    if (isDragging) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+</script>
 </body>
 </html>
