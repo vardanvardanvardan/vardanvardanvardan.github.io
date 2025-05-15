@@ -13,8 +13,8 @@
   <link rel="icon" type="image/x-icon" href="/trash/favicon.ico">
   <meta name="msapplication-TileColor" content="#da532c"/>
   <meta name="theme-color" content="#ffffff"/>
-  <link rel="preload" href="https://vrdn.cc/trash/givemehighfive.css" as="style"/>
-  <link rel="stylesheet" href="https://vrdn.cc/trash/givemehighfive.css"/>
+  <link rel="preload" href="/trash/givemehighfive.css" as="style"/>
+  <link rel="stylesheet" href="/trash/givemehighfive.css"/>
   <style>
     .dot-outline {
       position: absolute;
@@ -31,24 +31,24 @@
     <div class="absolute inset-0 overflow-hidden select-none z-10">
       <div class="absolute top-0 left-0 bottom-[90px] right-[90px]">
 
-        <!-- ICONS -->
+       
         <a data-drag="true" data-index="0" class="absolute text-sm flex flex-col items-center justify-center cursor-move w-[90px]" style="top:75%;left:65%;" href="/changelog">
-          <img draggable="false" src="https://vrdn.cc/trash/notepa.png" width="55" height="64" class="rendering-pixelated pointer-events-auto"/>
+          <img draggable="false" src="/trash/notepa.png" width="55" height="64" class="rendering-pixelated pointer-events-auto"/>
           <span class="pointer-events-auto text-center bg-white">changelog</span>
         </a>
 
         <a data-drag="true" data-index="1" class="absolute text-sm flex flex-col items-center justify-center cursor-move w-[90px]" style="top:15%;left:55%;" href="/doc">
-          <img draggable="false" src="https://vrdn.cc/trash/preach.png" width="64" height="64" class="rendering-pixelated pointer-events-auto"/>
+          <img draggable="false" src="/trash/preach.png" width="64" height="64" class="rendering-pixelated pointer-events-auto"/>
           <span class="pointer-events-auto text-center bg-white">​</span>
         </a>
 
         <a data-drag="true" data-index="2" class="absolute text-sm flex flex-col items-center justify-center cursor-move w-[90px]" style="top:48%;left:18%;" href="/video">
-          <img draggable="false" src="https://vrdn.cc/trash/watch.png" width="64" height="60" class="rendering-pixelated pointer-events-auto"/>
+          <img draggable="false" src="/trash/watch.png" width="64" height="60" class="rendering-pixelated pointer-events-auto"/>
           <span class="pointer-events-auto text-center bg-white">​</span>
         </a>
 
         <a data-drag="true" data-index="3" class="absolute text-sm flex flex-col items-center justify-center cursor-move w-[90px]" style="top:50%;left:50%;">
-          <img draggable="false" src="https://vrdn.cc/trash/tedo.jpg" width="84" height="84" class="rendering-pixelated pointer-events-auto">
+          <img draggable="false" src="/trash/tedo.jpg" width="84" height="84" class="rendering-pixelated pointer-events-auto">
         </a>
 
       </div>
@@ -62,18 +62,19 @@
     </div>
   </div>
 
-  <!-- DOTTED OUTLINE DIV -->
+  
   <div class="dot-outline" id="dot-outline"></div>
 
-  <!-- DRAG + SAVE SCRIPT -->
+  
   <script>
     const items = document.querySelectorAll('[data-drag="true"]');
     const outline = document.getElementById('dot-outline');
     let isDragging = false;
     let offsetX = 0, offsetY = 0;
     let currentItem = null;
+    let wasDragged = false;
 
-    // Load saved positions
+    
     items.forEach(item => {
       const index = item.dataset.index;
       const saved = localStorage.getItem('drag-pos-' + index);
@@ -104,6 +105,7 @@
       offsetX = x - el.offsetLeft;
       offsetY = y - el.offsetTop;
       isDragging = true;
+      wasDragged = false;
       currentItem = el;
       el.style.zIndex = 1000;
       showOutline(el);
@@ -111,6 +113,7 @@
 
     const onDrag = (x, y) => {
       if (!isDragging || !currentItem) return;
+      wasDragged = true;
       const newLeft = x - offsetX;
       const newTop = y - offsetY;
       currentItem.style.left = `${newLeft}px`;
@@ -128,14 +131,17 @@
     };
 
     items.forEach(item => {
-      // Mouse events
       item.addEventListener('mousedown', (e) => {
         e.preventDefault();
         startDrag(item, e.clientX, e.clientY);
       });
 
-      item.addEventListener('click', () => {
-        showOutline(item);
+      item.addEventListener('click', (e) => {
+        if (wasDragged) {
+          e.preventDefault(); 
+        } else {
+          showOutline(item);
+        }
       });
 
       document.addEventListener('mousemove', (e) => {
@@ -146,7 +152,7 @@
         endDrag();
       });
 
-      // Touch events
+      
       item.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         startDrag(item, touch.clientX, touch.clientY);
@@ -160,6 +166,12 @@
 
       document.addEventListener('touchend', () => {
         endDrag();
+      });
+
+      item.addEventListener('touchend', (e) => {
+        if (wasDragged) {
+          e.preventDefault(); 
+        }
       });
     });
   </script>
