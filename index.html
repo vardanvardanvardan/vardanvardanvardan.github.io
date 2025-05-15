@@ -193,6 +193,12 @@
     }
   }, { passive: false });
 
+  document.addEventListener('click', (e) => {
+  if (![...items].some(item => item.contains(e.target))) {
+    outline.style.display = 'none';
+  }
+});
+
 </script>
 </body>
 </html>
